@@ -5,4 +5,5 @@
     <color name="my_primary">#00A5E3</color>
     <color name="my_secondary">#8DD7BF</color>
     <color name="my_statusbar">#FFBF65</color>
+    <color name="my_text">#FF5768</color>
 </resources>
