@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndresAndroid</string>
+    <string name="hello_message">Bonjuor tout le monde!</string>
+    <string name="button_message">Je suis un bouton</string>
+</resources>
