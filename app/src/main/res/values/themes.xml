@@ -2,6 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AndresAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/my_primary</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/my_secondary</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/my_statusbar</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
