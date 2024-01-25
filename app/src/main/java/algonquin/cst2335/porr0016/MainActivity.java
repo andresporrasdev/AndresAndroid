@@ -24,11 +24,14 @@ public class MainActivity extends AppCompatActivity {
         TextView myText = variableBinding.textview;
         Button myButton = variableBinding.mybutton;
         EditText myEdit = variableBinding.myedittext;
+        String editString = myEdit.getText().toString();
 
-        myButton.setOnClickListener(v -> {
-            String editString = myEdit.getText().toString();
-            myText.setText( "Your edit text has: " + editString);
-        });
+        myButton.setOnClickListener(v -> myText.setText("Your edit text has: " + editString));
+
+//        myButton.setOnClickListener(v -> {
+//            String editString = myEdit.getText().toString();
+//            myText.setText( "Your edit text has: " + editString);
+//        });
 
     }
 }
