@@ -48,5 +48,22 @@ public class MainActivity extends AppCompatActivity {
 //            String editString = myEdit.getText().toString();
 //            myText.setText( "Your edit text has: " + editString);
 //        });
+        model.isSelected.observe(this, isChecked -> {
+            variableBinding.checkBox.setChecked(isChecked);
+            variableBinding.radioButton.setChecked(isChecked);
+            variableBinding.switch1.setChecked(isChecked);
+        });
+
+        variableBinding.checkBox.setOnCheckedChangeListener((btn, isChecked) -> {
+            model.isSelected.postValue(isChecked);
+        });
+
+        variableBinding.switch1.setOnCheckedChangeListener((btn, isChecked) -> {
+            model.isSelected.postValue(isChecked);
+        });
+        variableBinding.radioButton.setOnCheckedChangeListener((btn,isChecked) -> {
+            model.isSelected.postValue(isChecked);
+        });
+
     }
 }
