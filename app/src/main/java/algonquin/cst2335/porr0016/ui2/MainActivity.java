@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //            variableBinding.textview.setText("Your edit text has: " + model.editString);
         });
 
+
 //        myButton.setOnClickListener(v -> myText.setText("Your edit text has: " + model.editString));
 
 //        myButton.setOnClickListener(v -> {
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
         variableBinding.radioButton.setOnCheckedChangeListener((btn,isChecked) -> {
             model.isSelected.postValue(isChecked);
         });
+
+        variableBinding.myImageButton.setOnClickListener(Click -> {
+            Toast.makeText(this,"Width=" + variableBinding.myImageButton.getMeasuredWidth()+ " Height=" + variableBinding.myImageButton.getMeasuredHeight(),Toast.LENGTH_LONG).show();
+
+        });
+
+//        variableBinding.myImageButton.setOnClickListener(Image, isPushed ->{
+//            model.imageButton.setValue(isPushed);
+//        });
+
 
     }
 }
