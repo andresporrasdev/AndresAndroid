@@ -48,6 +48,5 @@ public class MainActivity extends AppCompatActivity {
 //            String editString = myEdit.getText().toString();
 //            myText.setText( "Your edit text has: " + editString);
 //        });
-
     }
 }
