@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="@+id/button2" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/flagview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -50,12 +50,12 @@
         app:layout_constraintTop_toBottomOf="@+id/button1" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/spin_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="Switch"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        android:text="@string/sping_message"
+        app:layout_constraintBottom_toBottomOf="@+id/flagview"
+        app:layout_constraintStart_toEndOf="@+id/flagview"
+        app:layout_constraintTop_toTopOf="@+id/flagview" />
 </androidx.constraintlayout.widget.ConstraintLayout>
