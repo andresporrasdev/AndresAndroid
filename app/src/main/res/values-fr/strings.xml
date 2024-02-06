@@ -3,4 +3,8 @@
     <string name="app_name">AndresAndroid</string>
     <string name="hello_message">Bonjuor tout le monde!</string>
     <string name="button_message">Je suis un bouton</string>
+    <string name="sping_message">Drapeau tournant</string>
+    <string name="button1">Bouton 1</string>
+    <string name="button2">Bouton 2</string>
+    <string name="button3">Bouton 3</string>
 </resources>
