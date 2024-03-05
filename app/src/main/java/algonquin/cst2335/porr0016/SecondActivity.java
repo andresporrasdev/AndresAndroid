@@ -12,12 +12,15 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
+    private ActivityResultLauncher<Intent> cameraResultLauncher;
+
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
@@ -50,30 +53,25 @@ public class SecondActivity extends AppCompatActivity {
             startActivity(call);
         });
 
+        cameraResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        assert data != null;
+                        Bitmap thumbnail = data.getParcelableExtra("data");
+                        profileImage.setImageBitmap(thumbnail);
 
-//        buttonChangePicture.setOnClickListener(click ->{
-            //Taking a picture
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            ActivityResultLauncher<Intent> cameraResult = registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
+                    }
+                });
 
-                    new ActivityResultCallback<ActivityResult>() {
-                        @Override
-                        public void onActivityResult(ActivityResult result) {
-                            if (result.getResultCode() == Activity.RESULT_OK) {
-                                Intent data = result.getData();
-                                Bitmap thumbnail = null;
-                                if (data != null) {
-                                    thumbnail = data.getParcelableExtra("data");
-                                }
-                                profileImage.setImageBitmap(thumbnail);
+        buttonChangePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+                cameraResultLauncher.launch(cameraIntent);
+            }
+        });
 
-                            }
-                        }
-                    });
-            cameraResult.launch(cameraIntent);
-
-//        });
     }
 }
