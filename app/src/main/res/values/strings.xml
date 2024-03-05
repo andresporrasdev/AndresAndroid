@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AndresAndroid</string>
     <string name="hello_message">Hello World!</string>
-    <string name="button_message">I\'m a button</string>
+    <string name="button_message">Login</string>
+    <string name="type_password">Write your password</string>
 </resources>
