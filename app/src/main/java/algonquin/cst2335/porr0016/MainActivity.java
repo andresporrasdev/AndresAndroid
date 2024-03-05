@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+    EditText emailEditText = findViewById(R.id.editTextTextEmailAddress);
+
 
     @Override
     protected void onDestroy() {
@@ -45,16 +49,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EditText emailEditText;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String TAG = "MainActivity";
         Button loginButton = findViewById(R.id.loginButton);
-        EditText emailEditText = findViewById(R.id.editTextTextEmailAddress);
+        emailEditText = findViewById(R.id.editTextTextEmailAddress);
+
+
+        //SharedPreferences.
+        SharedPreferences prefs = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+//        prefs.getString("VariableName", "");
+        String emailAddress = prefs.getString("LoginName", "");
 
         Log.d( TAG, "Message");
         Log.w( "MainActivity", "In onCreate() - Loading Widgets" );
         Intent nextPage = new Intent( MainActivity.this, SecondActivity.class);
         loginButton.setOnClickListener(clk->{
+            String emailAddress2 = emailEditText.getText().toString();
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("LoginName", emailAddress2);
+            editor.apply();
             nextPage.putExtra( "EmailAddress", emailEditText.getText().toString() );
             startActivity( nextPage);});
 
