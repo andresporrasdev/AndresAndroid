@@ -1,9 +1,13 @@
 package algonquin.cst2335.porr0016;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -28,6 +32,7 @@ import algonquin.cst2335.porr0016.ChatMessageDAO;
 
 
 public class ChatRoom extends AppCompatActivity {
+
     private ActivityChatRoomBinding binding;
     ArrayList<ChatMessages> messages;
     ChatRoomViewModel chatModel;
@@ -37,10 +42,56 @@ public class ChatRoom extends AppCompatActivity {
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.item_1) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete All Messages")
+                    .setMessage("Are you sure you want to delete all messages?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+                        messages.clear();
+                        myAdapter.notifyDataSetChanged();
+                        Toast.makeText(this, "All messages deleted", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+            return true;
+        } else if (id == R.id.about) {
+            Toast.makeText(this, "Version 1.0, created by Andres Porras", Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void deleteSelectedMessage() {
+        if (removedMessage != null) {
+            int position = messages.indexOf(removedMessage);
+            if (position != -1) {
+                messages.remove(position);
+                myAdapter.notifyItemRemoved(position);
+                Snackbar.make(binding.getRoot(), "Message deleted", Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    }
+    
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatRoomBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Set the toolbar as the support action bar
+        setSupportActionBar(binding.myToolbar);
 
         // Create the Room database instance and obtain the DAO
         MessageDatabase db = Room.databaseBuilder(getApplicationContext(), MessageDatabase.class, "database-name").build();
