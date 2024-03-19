@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +33,8 @@ public class ChatRoom extends AppCompatActivity {
     ChatRoomViewModel chatModel;
     private RecyclerView.Adapter myAdapter;
     private ChatMessageDAO mDAO; // Declare mDAO here
+    ChatMessages removedMessage; // Define removedMessage outside of any method
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +120,7 @@ public class ChatRoom extends AppCompatActivity {
             super(itemView);
             itemView.setOnClickListener(clk->{
                 int position =getAbsoluteAdapterPosition();
+                removedMessage = messages.get(position); // Store the message that is being removed
                 AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
                 builder.setMessage("Do you want to delete the message:"+messageText.getText());;
                 builder.setTitle("Question");
@@ -123,6 +128,11 @@ public class ChatRoom extends AppCompatActivity {
                 builder.setPositiveButton("Yes", (dialog, cl)->{
                     messages.remove(position);
                     myAdapter.notifyItemRemoved(position); //adt to myAdapter
+                    Snackbar.make(messageText, "You deleted message# "+position, Snackbar.LENGTH_LONG)
+                            .setAction("Undo", clk2 ->{
+                                messages.add(position, removedMessage);
+                                myAdapter.notifyItemInserted(position);
+                            }).show();
                 }).create().show();
 
 
